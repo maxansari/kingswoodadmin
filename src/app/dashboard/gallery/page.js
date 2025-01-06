@@ -102,6 +102,7 @@ const GalleryUploadsPage = () => {
   //  // Delete image from Cloudinary and Firestore
 
   const deleteImageFromGallery = async (publicId) => {
+    console.log("Deleting image with publicId:", publicId);
     try {
       const response = await fetch("/api/deleteImage", {
         method: "POST",

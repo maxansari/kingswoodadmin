@@ -1,6 +1,6 @@
 import crypto from "crypto";
 import fetch from "node-fetch"; // Ensure node-fetch is installed
-import { db } from "../../lib/firebaseConfig.js"; // Import Firebase Firestore config
+import { db } from "../../lib/firebaseConfig"; // Import Firebase Firestore config
 import {
   collection,
   query,
