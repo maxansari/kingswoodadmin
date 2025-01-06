@@ -11,6 +11,8 @@ import {
   getDocs,
   query,
   deleteDoc,
+  doc,
+  where,
 } from "firebase/firestore";
 import { TiDeleteOutline } from "react-icons/ti";
 import { MdDeleteForever } from "react-icons/md";
