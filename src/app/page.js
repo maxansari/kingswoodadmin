@@ -1,8 +1,34 @@
-import Image from "next/image";
+"use client";
+import { useState } from "react";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
+import { auth } from "../../lib/firebaseConfig.js";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { useRouter } from "next/navigation.js";
 
 export default function Home() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  // Sign in a user
+  async function signIn() {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      console.log("User signed in: ", userCredential.user);
+      router.push("/dashboard");
+    } catch (error) {
+      console.error("Error signing in: ", error.message);
+    }
+  }
+
   return (
     <div className="">
       <div className="text-center text-xl py-4 border-b-[1px] border-gray-700">
@@ -13,8 +39,13 @@ export default function Home() {
         <div className="mt-10">
           <h2>Login Into Your Account</h2>
           <form className="mt-4">
-            <Input placeholder={"Email"} type={"email"} />
             <Input
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder={"Email"}
+              type={"email"}
+            />
+            <Input
+              onChange={(e) => setPassword(e.target.value)}
               classNameContainer="mt-4"
               placeholder={"Password"}
               type={"password"}
@@ -22,6 +53,11 @@ export default function Home() {
             <Button
               variant="contained"
               className="mt-4 w-full flex justify-center"
+              onClick={(e) => {
+                e.preventDefault();
+                console.log("Email: ", email);
+                signIn();
+              }}
             >
               Login
             </Button>
