@@ -5,7 +5,13 @@ import Breadcrums from "@/components/Breadcrums";
 import Button from "@/components/Button";
 import Image from "next/image";
 import { db } from "../../../../lib/firebaseConfig";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  deleteDoc,
+} from "firebase/firestore";
 import { TiDeleteOutline } from "react-icons/ti";
 import { MdDeleteForever } from "react-icons/md";
 
@@ -114,10 +120,37 @@ const GalleryUploadsPage = () => {
 
       const data = await response.json();
       if (data.message) {
-        console.log("Image deleted successfully");
+        await deleteImageFromFirestore(publicId); // Call Firestore deletion function
+        console.log(
+          "Image successfully deleted from Firestore and Cloudinary.",
+        );
       }
     } catch (error) {
       console.error("Error deleting image:", error);
+    }
+  };
+
+  // Function to delete image from Firestore
+  const deleteImageFromFirestore = async (publicId) => {
+    try {
+      // Initialize Firestore collection reference
+      const galleryRef = collection(db, "gallery");
+
+      // Query Firestore to find the image document by publicId
+      const q = query(galleryRef, where("public_id", "==", publicId));
+      const snapshot = await getDocs(q);
+
+      if (!snapshot.empty) {
+        snapshot.forEach(async (docSnap) => {
+          const docRef = doc(db, "gallery", docSnap.id);
+          await deleteDoc(docRef); // Delete the document from Firestore
+          console.log(`Document with ID ${docSnap.id} deleted from Firestore`);
+        });
+      } else {
+        console.log("No matching document found in Firestore");
+      }
+    } catch (error) {
+      console.error("Error deleting image from Firestore:", error);
     }
   };
 

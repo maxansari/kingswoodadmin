@@ -1,14 +1,5 @@
 import crypto from "crypto";
 import fetch from "node-fetch"; // Ensure node-fetch is installed
-import { db } from "../../lib/firebaseConfig"; // Import Firebase Firestore config
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  deleteDoc,
-  doc,
-} from "firebase/firestore";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -56,24 +47,8 @@ export default async function handler(req, res) {
         throw new Error("Cloudinary image deletion failed");
       }
 
-      // Step 2: Delete the image reference from Firestore by publicId
-      const galleryRef = collection(db, "gallery");
-      const q = query(galleryRef, where("public_id", "==", publicId)); // Query using publicId instead of imageUrl
-
-      const snapshot = await getDocs(q);
-
-      if (!snapshot.empty) {
-        snapshot.forEach(async (docSnap) => {
-          const docRef = doc(db, "gallery", docSnap.id);
-          await deleteDoc(docRef);
-          console.log(`Document with ID ${docSnap.id} deleted from Firestore`);
-        });
-      } else {
-        console.log("No matching document found in Firestore");
-      }
-
       return res.status(200).json({
-        message: "Image deleted successfully from Cloudinary and Firestore",
+        message: "Image deleted successfully from Cloudinary",
       });
     } catch (error) {
       return res
