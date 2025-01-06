@@ -56,16 +56,9 @@ export default async function handler(req, res) {
         throw new Error("Cloudinary image deletion failed");
       }
 
-      // Step 2: Delete the image reference from Firestore
+      // Step 2: Delete the image reference from Firestore by publicId
       const galleryRef = collection(db, "gallery");
-      const q = query(
-        galleryRef,
-        where(
-          "imageUrl",
-          "==",
-          `https://res.cloudinary.com/${cloudinaryConfig.cloudName}/image/upload/v${timestamp}/${publicId}`,
-        ),
-      );
+      const q = query(galleryRef, where("public_id", "==", publicId)); // Query using publicId instead of imageUrl
 
       const snapshot = await getDocs(q);
 
