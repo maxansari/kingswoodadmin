@@ -19,6 +19,7 @@ const GalleryUploadsPage = () => {
       const querySnapshot = await getDocs(collection(db, "gallery"));
       const images = querySnapshot.docs.map((doc) => doc.data());
       setGalleryImages(images);
+      console.log(images);
     } catch (error) {
       console.error("Error fetching images:", error);
     }
@@ -66,7 +67,7 @@ const GalleryUploadsPage = () => {
   const saveToFirebase = async ({ image_url, public_id }) => {
     try {
       const docRef = await addDoc(collection(db, "gallery"), {
-        impage_url: image_url,
+        image_url: image_url,
         public_id: public_id,
         uploadedAt: new Date(),
       });
