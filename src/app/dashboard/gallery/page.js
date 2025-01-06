@@ -139,6 +139,7 @@ const GalleryUploadsPage = () => {
       // Query Firestore to find the image document by publicId
       const q = query(galleryRef, where("public_id", "==", publicId));
       const snapshot = await getDocs(q);
+      console.log("Snapshot:", snapshot);
 
       if (!snapshot.empty) {
         snapshot.forEach(async (docSnap) => {
