@@ -13,11 +13,22 @@ import {
   doc,
 } from "firebase/firestore";
 import Options from "@/components/Options";
+import Select from "react-tailwindcss-select";
+
+const options = [
+  { value: "red", label: "Red" },
+  { value: "blue", label: "blue" },
+  { value: "green", label: "green" },
+  { value: "yellow", label: "yellow" },
+  { value: "orange", label: "orange" },
+];
+
 
 const Page = () => {
   const [marqueText, setMarqueText] = useState("");
   const [marqueLink, setMarqueLink] = useState("");
   const [marque, setMarque] = useState([]);
+  const [marqueColor, setMarqueColor] = useState("");
 
   const fetchMarques = async () => {
     try {
@@ -43,6 +54,7 @@ const Page = () => {
       const docRef = await addDoc(collection(db, "marque"), {
         marqueText: marqueText,
         marqueLink: marqueLink,
+        marqueColor: marqueColor,
         marqueDate: new Date(),
       });
       console.log("Document written with ID: ", docRef.id);
@@ -60,6 +72,10 @@ const Page = () => {
     } catch (e) {
       console.error("Error removing document: ", e);
     }
+  };
+
+  const handleSelect = (value) => {
+    setMarqueColor(value);
   };
 
   return (
@@ -94,6 +110,15 @@ const Page = () => {
               placeholder={"Marque Link"}
               type={"text"}
             />
+
+            <div className="mt-4">
+            <label className="text-white">Marque Color</label>
+            <Select
+              value={marqueColor}
+              onChange={handleSelect}
+              options={options}
+            />
+          </div>
 
             <Button
               variant="contained"
