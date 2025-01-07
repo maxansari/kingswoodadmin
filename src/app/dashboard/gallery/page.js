@@ -17,6 +17,7 @@ import {
 import { TiDeleteOutline } from "react-icons/ti";
 import { MdDeleteForever } from "react-icons/md";
 import Options from "@/components/Options";
+import withAuth from "@/components/withAuth";
 
 const GalleryUploadsPage = () => {
   const [file, setFile] = useState(null);
@@ -225,4 +226,4 @@ const GalleryUploadsPage = () => {
   );
 };
 
-export default GalleryUploadsPage;
+export default withAuth(GalleryUploadsPage);

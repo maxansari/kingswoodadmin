@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { useRouter } from "next/navigation.js";
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function Home() {
   const router = useRouter();
@@ -25,6 +26,7 @@ export default function Home() {
       console.log("User signed in: ", userCredential.user);
       router.push("/dashboard");
     } catch (error) {
+      toast.error(error.message);
       console.error("Error signing in: ", error.message);
     }
   }
@@ -40,11 +42,13 @@ export default function Home() {
           <h2>Login Into Your Account</h2>
           <form className="mt-4">
             <Input
+              required
               onChange={(e) => setEmail(e.target.value)}
               placeholder={"Email"}
               type={"email"}
             />
             <Input
+              required
               onChange={(e) => setPassword(e.target.value)}
               classNameContainer="mt-4"
               placeholder={"Password"}
@@ -70,6 +74,7 @@ export default function Home() {
           </p>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

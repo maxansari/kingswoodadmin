@@ -14,6 +14,8 @@ import {
 } from "firebase/firestore";
 import Options from "@/components/Options";
 import Select from "react-tailwindcss-select";
+import withAuth from "@/components/withAuth";
+
 
 const options = [
   { value: "red", label: "Red" },
@@ -162,4 +164,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default withAuth(Page);

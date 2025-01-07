@@ -2,6 +2,7 @@
 import Breadcrums from "@/components/Breadcrums";
 import { useRouter } from "next/navigation";
 import Options from "@/components/Options";
+import withAuth from "@/components/withAuth.js";
 
 
 const DashboardPage = () => {
@@ -33,4 +34,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+export default withAuth(DashboardPage);

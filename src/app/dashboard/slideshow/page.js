@@ -17,6 +17,7 @@ import {
 import { TiDeleteOutline } from "react-icons/ti";
 import { MdDeleteForever } from "react-icons/md";
 import Options from "@/components/Options";
+import withAuth from "@/components/withAuth";
 
 
 const Page = () => {
@@ -230,4 +231,4 @@ const fetchSlideShowImages = async () => {
     );
     }
 
-    export default Page;
+    export default withAuth(Page);

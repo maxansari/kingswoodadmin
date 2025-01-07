@@ -2,12 +2,18 @@
 "use client"
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-
+import handleLogout from "../../lib/signOut";
 
 const Options = (props) => {
 
     const [showOptions, setShowOptions] = useState(false);
     const router = useRouter();
+
+    const logout = () => {
+      if (handleLogout()) {
+        router.push("/");
+      }
+    }
 
     return <>
     <div className="relative">
@@ -58,7 +64,7 @@ const Options = (props) => {
 
 
         <button
-            onClick={()=>router.push("/")}
+            onClick={()=>logout()}
           className="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50 dark:text-red-500 dark:hover:bg-red-600/10"
           role="menuitem"
         >

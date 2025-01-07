@@ -7,6 +7,8 @@ import { db } from "../../../../lib/firebaseConfig.js";
 import { addDoc, collection,getDocs, deleteDoc,doc } from "firebase/firestore";
 import Select from "react-tailwindcss-select";
 import Options from "@/components/Options";
+import withAuth from "@/components/withAuth";
+
 
 const options = [
   { value: "New", label: "🎀 New" },
@@ -153,4 +155,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default withAuth(Page);
