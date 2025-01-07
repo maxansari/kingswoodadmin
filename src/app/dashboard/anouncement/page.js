@@ -6,7 +6,7 @@ import Button from "@/components/Button";
 import { db } from "../../../../lib/firebaseConfig.js";
 import { addDoc, collection,getDocs, deleteDoc,doc } from "firebase/firestore";
 import Select from "react-tailwindcss-select";
-
+import Options from "@/components/Options";
 
 const options = [
   { value: "New", label: "🎀 New" },
@@ -72,8 +72,9 @@ const Page = () => {
 
   return (
     <>
-      <div className="text-center text-xl py-4 border-b-[1px] border-gray-700">
+       <div className="px-4 flex justify-between text-center text-xl py-4 border-b-[1px] border-gray-700">
         <h1>KingsWood Admin Console</h1>
+        <Options />
       </div>
       <div className="flex justify-center mt-6">
         <Breadcrums

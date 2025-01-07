@@ -1,14 +1,17 @@
 "use client";
 import Breadcrums from "@/components/Breadcrums";
 import { useRouter } from "next/navigation";
+import Options from "@/components/Options";
+
 
 const DashboardPage = () => {
   const router = useRouter();
 
   return (
     <div>
-      <div className="text-center text-xl py-4 border-b-[1px] border-gray-700">
+        <div className="px-4 flex justify-between text-center text-xl py-4 border-b-[1px] border-gray-700">
         <h1>KingsWood Admin Console</h1>
+        <Options />
       </div>
       <div className="flex w-[80%] mx-auto mt-4 flex-col">
         <h2 className="mt-10">Dashboard</h2>

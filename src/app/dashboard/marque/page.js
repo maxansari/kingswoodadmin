@@ -12,6 +12,7 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
+import Options from "@/components/Options";
 
 const Page = () => {
   const [marqueText, setMarqueText] = useState("");
@@ -63,8 +64,9 @@ const Page = () => {
 
   return (
     <div>
-      <div className="text-center text-xl py-4 border-b-[1px] border-gray-700">
+        <div className="px-4 flex justify-between text-center text-xl py-4 border-b-[1px] border-gray-700">
         <h1>KingsWood Admin Console</h1>
+        <Options />
       </div>
       <div className="flex justify-center mt-6">
         <Breadcrums

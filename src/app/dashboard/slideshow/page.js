@@ -16,6 +16,7 @@ import {
 } from "firebase/firestore";
 import { TiDeleteOutline } from "react-icons/ti";
 import { MdDeleteForever } from "react-icons/md";
+import Options from "@/components/Options";
 
 
 const Page = () => {
@@ -165,8 +166,9 @@ const fetchSlideShowImages = async () => {
 
     return (
         <div>
-         <div className="text-center text-xl py-4 border-b-[1px] border-gray-700">
+         <div className="px-4 flex justify-between text-center text-xl py-4 border-b-[1px] border-gray-700">
         <h1>KingsWood Admin Console</h1>
+        <Options />
       </div>
       <div className="flex justify-center mt-6">
         <Breadcrums
@@ -196,7 +198,7 @@ const fetchSlideShowImages = async () => {
           </div>
           </div>
 
-            <div className="mt-4">
+            <div className="mt-4 mb-10">
                 <h3>All Slideshow</h3>
 
                 <div className="flex flex-wrap gap-4 mt-4">

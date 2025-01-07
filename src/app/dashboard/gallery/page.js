@@ -16,6 +16,7 @@ import {
 } from "firebase/firestore";
 import { TiDeleteOutline } from "react-icons/ti";
 import { MdDeleteForever } from "react-icons/md";
+import Options from "@/components/Options";
 
 const GalleryUploadsPage = () => {
   const [file, setFile] = useState(null);
@@ -159,8 +160,9 @@ const GalleryUploadsPage = () => {
 
   return (
     <div>
-      <div className="text-center text-xl py-4 border-b-[1px] border-gray-700">
+        <div className="px-4 flex justify-between text-center text-xl py-4 border-b-[1px] border-gray-700">
         <h1>KingsWood Admin Console</h1>
+        <Options />
       </div>
       <div className="flex justify-center mt-6">
         <Breadcrums
